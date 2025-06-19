@@ -1,110 +1,184 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 
-const AnimatedBackground = () => {
+export default function AnimatedBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const mouse = useRef({ x: -1000, y: -1000 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    const dpr = window.devicePixelRatio || 1;
 
-    const particles: Array<{
+    const resizeCanvas = () => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+    };
+
+    resizeCanvas();
+
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    const stars = Array.from({ length: 130 }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      radius: Math.random() * 1.2 + 0.5,
+    }));
+
+    // Shooting stars (light theme only)
+    let shootingStars: {
       x: number;
       y: number;
-      size: number;
-      speedX: number;
-      speedY: number;
-      opacity: number;
-    }> = [];
+      vx: number;
+      vy: number;
+      alpha: number;
+      color: string;
+    }[] = [];
 
-    for (let i = 0; i < 60; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 2 + 1,
-        speedX: (Math.random() - 0.5) * 0.5,
-        speedY: (Math.random() - 0.5) * 0.5,
-        opacity: Math.random() * 0.5 + 0.5,
+    const colors = ['#FF6B6B', '#FFD93D', '#6BCB77', '#4D96FF', '#E96479'];
+
+    const spawnShootingStar = () => {
+      shootingStars.push({
+        x: Math.random() * width,
+        y: Math.random() * height * 0.5,
+        vx: 4 + Math.random() * 2,
+        vy: 2 + Math.random() * 1.5,
+        alpha: 1,
+        color: colors[Math.floor(Math.random() * colors.length)],
       });
-    }
+    };
 
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let shootingTimer = 0;
 
-      // 🎨 Updated Gradient
-      const gradient = ctx.createLinearGradient(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-      );
-      gradient.addColorStop(0, 'rgba(3, 12, 23, 1)'); // #030c17
-      gradient.addColorStop(0.5, 'rgba(9, 19, 28, 1)'); // #09131c
-      gradient.addColorStop(1, 'rgba(3, 22, 38, 1)'); // #06345c
+    const draw = () => {
+      ctx.clearRect(0, 0, width, height);
 
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      const isDark = document.documentElement.classList.contains('dark');
 
-      particles.forEach((particle, index) => {
-        particle.x += particle.speedX;
-        particle.y += particle.speedY;
+      const starColor =
+        getComputedStyle(document.body)
+          .getPropertyValue('--background-inverse')
+          .trim() || '#ffffff';
 
-        if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
-        if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
+      const strokeColor =
+        getComputedStyle(document.body)
+          .getPropertyValue('--stroke-color')
+          .trim() || '#d1d5db';
 
-        ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(63, 202, 212, ${particle.opacity})`;
-        ctx.fill();
+      if (isDark) {
+        // Draw stars
+        stars.forEach((star) => {
+          ctx.fillStyle = starColor;
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+          ctx.fill();
+        });
 
-        particles.slice(index + 1).forEach((otherParticle) => {
-          const dx = particle.x - otherParticle.x;
-          const dy = particle.y - otherParticle.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
+        //Connect stars
+        for (let i = 0; i < stars.length; i++) {
+          for (let j = i + 1; j < stars.length; j++) {
+            const dx = stars[i].x - stars[j].x;
+            const dy = stars[i].y - stars[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 100) {
+              ctx.beginPath();
+              ctx.strokeStyle = strokeColor;
+              ctx.lineWidth = 0.5;
+              ctx.moveTo(stars[i].x, stars[i].y);
+              ctx.lineTo(stars[j].x, stars[j].y);
+              ctx.stroke();
+            }
+          }
+        }
 
-          if (distance < 100) {
+        // Connect stars to mouse
+        stars.forEach((star) => {
+          const dx = star.x - mouse.current.x;
+          const dy = star.y - mouse.current.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 120) {
             ctx.beginPath();
-            ctx.moveTo(particle.x, particle.y);
-            ctx.lineTo(otherParticle.x, otherParticle.y);
-            ctx.strokeStyle = `rgba(99, 102, 241, ${
-              0.1 * (1 - distance / 100)
-            })`;
+            ctx.strokeStyle = strokeColor;
+            ctx.lineWidth = 0.4;
+            ctx.moveTo(star.x, star.y);
+            ctx.lineTo(mouse.current.x, mouse.current.y);
             ctx.stroke();
           }
         });
-      });
 
-      requestAnimationFrame(animate);
+        // Animate stars
+        stars.forEach((star) => {
+          star.x += star.vx;
+          star.y += star.vy;
+          if (star.x < 0 || star.x > width) star.vx *= -1;
+          if (star.y < 0 || star.y > height) star.vy *= -1;
+        });
+      } else {
+        // Light theme: colorful shooting stars
+        if (shootingTimer <= 0) {
+          const spawnCount = Math.floor(Math.random() * 2) + 1; // 1 or 2 at a time
+          for (let i = 0; i < spawnCount; i++) {
+            spawnShootingStar();
+          }
+          shootingTimer = Math.floor(Math.random() * 40) + 10; // next burst in 10–50 frames
+        } else {
+          shootingTimer--;
+        }
+
+        shootingStars = shootingStars.filter((s) => s.alpha > 0);
+        shootingStars.forEach((s) => {
+          ctx.beginPath();
+          ctx.strokeStyle = `${s.color}${Math.floor(s.alpha * 255)
+            .toString(16)
+            .padStart(2, '0')}`;
+          ctx.lineWidth = 2;
+          ctx.moveTo(s.x, s.y);
+          ctx.lineTo(s.x - 20, s.y - 10);
+          ctx.stroke();
+
+          s.x += s.vx;
+          s.y += s.vy;
+          s.alpha -= 0.01;
+        });
+      }
+
+      requestAnimationFrame(draw);
     };
 
-    animate();
+    draw();
 
-    const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('mousemove', (e) => {
+      mouse.current = { x: e.clientX, y: e.clientY };
+    });
+
+    return () => {
+      window.removeEventListener('resize', resizeCanvas);
     };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-[-1]"
-      style={{
-        background:
-          'linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #0ea5e9 100%)',
-      }}
-    />
+    <motion.div
+      className="fixed inset-0 -z-10 bg-background"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
+      <canvas ref={canvasRef} className="w-full h-full" />
+    </motion.div>
   );
-};
-
-export default AnimatedBackground;
+}

@@ -1,10 +1,13 @@
+'use client';
 import Link from 'next/link';
 import { Button } from './ui/button';
 import { Moon, Sun } from 'lucide-react';
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 
 export default function Navbar() {
   return (
-    <nav className="sticky top-4 z-50 mx-auto w-full max-w-[100%] sm:max-w-[600px] md:max-w-[700px] lg:max-w-[800px] backdrop-blur-md bg-white/70 dark:bg-gray-900/70  rounded-xl shadow-xl">
+    <nav className="sticky top-0 h-nav z-50 mx-auto w-full max-w-[100%] sm:max-w-[600px] md:max-w-[700px] lg:max-w-[800px] backdrop-blur-md bg-white/70 dark:bg-gray-900/70  sm:rounded-xl shadow-xl">
       <div className="flex h-16 items-center justify-between px-4">
         {/* Left: Logo */}
         <Link
@@ -30,11 +33,7 @@ export default function Navbar() {
           </li>
         </ul>
 
-        <Button variant="outline" size="icon">
-          <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
+        <ThemeSwitch />
 
         {/* Mobile Hamburger */}
         <button className="md:hidden text-gray-700 dark:text-gray-200 text-2xl">
@@ -42,5 +41,31 @@ export default function Navbar() {
         </button>
       </div>
     </nav>
+  );
+}
+
+function ThemeSwitch() {
+  const { setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) return null;
+
+  const isDark = resolvedTheme === 'dark';
+
+  return (
+    <Button
+      variant="outline"
+      size="icon"
+      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+    >
+      {isDark ? (
+        <Sun className="pointer h-[1.2rem] w-[1.2rem]" />
+      ) : (
+        <Moon className="pointer h-[1.2rem] w-[1.2rem]" />
+      )}
+      <span className="sr-only">Toggle theme</span>
+    </Button>
   );
 }

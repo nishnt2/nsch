@@ -5,14 +5,11 @@
 :root {
   --background: #defaf5;
   --background-inverse: #000000;
-  --stroke-color: #3315c7ea;
-  --primary: 240 5.9% 10%;
-  --primary-foreground: 0 0% 98%;
+  --stroke-color: #201e282f;
+  --text-color: #213537;
 
-  --secondary: 240 4.8% 95.9%;
-  --secondary-foreground: 240 5.9% 10%;
-
-  --border: 240 5.9% 90%;
+  --glass-bg: #79869270;
+  --badge-border: #181818;
 
   --font-sans: 'Open Sans', sans-serif;
   --font-code: 'Fira Code', monospace;
@@ -22,14 +19,9 @@
   --background: #010906;
   --background-inverse: #eeeeee;
   --stroke-color: #ffffff19;
-
-  --primary: 0 0% 98%;
-  --primary-foreground: 240 5.9% 10%;
-
-  --secondary: 240 3.7% 15.9%;
-  --secondary-foreground: 0 0% 98%;
-
-  --border: 240 3.7% 15.9%;
+  --text-color: #9dbfb9;
+  --glass-bg: #030f1a70;
+  --badge-border: #a0a7ac;
 }
 
 body {

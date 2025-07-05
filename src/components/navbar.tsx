@@ -7,23 +7,20 @@ import { useEffect, useState } from 'react';
 
 export default function Navbar() {
   return (
-    <nav className="sticky top-0 h-nav z-50 mx-auto w-full max-w-[100%] sm:max-w-[600px] md:max-w-[700px] lg:max-w-[800px] backdrop-blur-md bg-white/70 dark:bg-gray-900/70  sm:rounded-xl shadow-xl">
+    <nav className="sticky top-0 md:top-1 h-nav z-50 mx-auto w-full max-w-[100%] sm:max-w-[600px] md:max-w-[700px] lg:max-w-[800px] backdrop-blur-md bg-white/70 dark:bg-gray-900/70  sm:rounded-xl shadow-xl">
       <div className="flex h-16 items-center justify-between px-4">
         {/* Left: Logo */}
-        <Link
-          href="/"
-          className="lg:text-xl md:text-lg font-code font-medium text-gray-900 dark:text-white"
-        >
-          Nishant{' '}
+        <Link href="/" className="lg:text-xl md:text-sm font-code ">
+          &lt;nsch/&gt;
           <span className="inline-block animate-wave origin-[70%_70%] text-2xl">
             👋
           </span>
         </Link>
 
         {/* Web Navigation */}
-        <ul className="hidden md:flex space-x-6 text-gray-700 dark:text-gray-200 font-medium">
+        <ul className="hidden md:flex space-x-6  font-medium">
           <li>
-            <Link href="#about">About</Link>
+            <Link href="/about">About</Link>
           </li>
           <li>
             <Link href="#projects">Projects</Link>
@@ -48,7 +45,9 @@ function ThemeSwitch() {
   const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   if (!mounted) return null;
 
@@ -56,14 +55,15 @@ function ThemeSwitch() {
 
   return (
     <Button
-      variant="outline"
+      variant="destructive"
       size="icon"
+      className="bg-transparent"
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
     >
       {isDark ? (
-        <Sun className="pointer h-[1.2rem] w-[1.2rem]" />
+        <Sun className="pointer h-[1.4rem] w-[1.4rem]" />
       ) : (
-        <Moon className="pointer h-[1.2rem] w-[1.2rem]" />
+        <Moon className="pointer h-[1.4rem] w-[1.4rem]" />
       )}
       <span className="sr-only">Toggle theme</span>
     </Button>

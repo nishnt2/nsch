@@ -1,10 +1,7 @@
 export default function Footer() {
   return (
-    <footer className="mt-16 border-t bg-[#030f1a]/70 border-gray-300 dark:border-gray-700 text-center py-10 text-sm text-gray-600 dark:text-gray-400">
-      <div className="mb-4 font-code">
-        © {new Date().getFullYear()} Nishant. Made with Nextjs.
-      </div>
-      <div className="flex justify-center space-x-6 text-base">
+    <footer className=" mt-16 border-t bg-[#030f1a]/70 border-gray-300 dark:border-gray-700 text-center pt-10 pb-4 text-sm">
+      <div className="mb-4 flex justify-center space-x-8 text-base">
         <a
           href="https://github.com/yourusername"
           target="_blank"
@@ -30,6 +27,12 @@ export default function Footer() {
           Twitter
         </a>
       </div>
+
+      <div className=" font-code">
+        © {new Date().getFullYear()} Nishant. Made with Nextjs.
+      </div>
+
+      <div className=" mt-6 font-code">Glad you visited :&#41;</div>
     </footer>
   );
 }

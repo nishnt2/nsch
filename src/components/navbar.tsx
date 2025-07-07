@@ -1,32 +1,35 @@
-'use client';
-import Link from 'next/link';
-import { Button } from './ui/button';
-import { Moon, Sun } from 'lucide-react';
-import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
+"use client";
+import Link from "next/link";
+import { Button } from "./ui/button";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 export default function Navbar() {
   return (
-    <nav className="sticky top-0 md:top-1 h-nav z-50 mx-auto w-full max-w-[100%] sm:max-w-[600px] md:max-w-[700px] lg:max-w-[800px] backdrop-blur-md bg-white/70 dark:bg-gray-900/70  sm:rounded-xl shadow-xl">
+    <nav className="xxl:text-base text-sm text-foreground sticky text- top-0 md:top-1 h-nav z-50 mx-auto w-full max-w-[100%] sm:max-w-[600px] md:max-w-[700px] lg:max-w-[800px] backdrop-blur-[2px] bg-white/70 dark:bg-gray-900/70  sm:rounded-xl shadow-xl">
       <div className="flex h-16 items-center justify-between px-4">
         {/* Left: Logo */}
-        <Link href="/" className="lg:text-xl md:text-sm font-code ">
-          &lt;nsch/&gt;
-          <span className="inline-block animate-wave origin-[70%_70%] text-2xl">
-            👋
-          </span>
+        <Link href="/" className="text-sm font-code font-medium">
+          &lt;Nsch/&gt;
         </Link>
 
         {/* Web Navigation */}
-        <ul className="hidden md:flex space-x-6  font-medium">
+        <ul className="hidden md:flex space-x-6 font-medium">
           <li>
-            <Link href="/about">About</Link>
+            <Link href="/about" className="hover:text-white">
+              About
+            </Link>
           </li>
           <li>
-            <Link href="#projects">Projects</Link>
+            <Link href="/projects" className="hover:text-white">
+              Projects
+            </Link>
           </li>
           <li>
-            <Link href="#contact">Contact</Link>
+            <Link href="/articles" className="hover:text-white">
+              Articles
+            </Link>
           </li>
         </ul>
 
@@ -51,14 +54,14 @@ function ThemeSwitch() {
 
   if (!mounted) return null;
 
-  const isDark = resolvedTheme === 'dark';
+  const isDark = resolvedTheme === "dark";
 
   return (
     <Button
       variant="destructive"
       size="icon"
       className="bg-transparent"
-      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+      onClick={() => setTheme(isDark ? "light" : "dark")}
     >
       {isDark ? (
         <Sun className="pointer h-[1.4rem] w-[1.4rem]" />

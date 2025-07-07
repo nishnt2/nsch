@@ -22,7 +22,8 @@ export default function Section({
           : 'bg-transparent backdrop-blur-0'
       )}
     >
-      <h2 className="text-indigo-700 text-lg font-medium">/{title} is this </h2>
+      <h2 className="text-sectionTitle text-lg font-medium">_{title} </h2>
+      <div className="h-4" />
       {children}
     </section>
   );

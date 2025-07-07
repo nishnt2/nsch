@@ -7,19 +7,20 @@
   --background-inverse: #000000;
   --stroke-color: #201e282f;
   --text-color: #213537;
-
+  --section-title: #2c4d4f;
   --glass-bg: #79869270;
   --badge-border: #181818;
 
-  --font-sans: 'Open Sans', sans-serif;
-  --font-code: 'Fira Code', monospace;
+  --font-sans: "Open Sans", sans-serif;
+  --font-code: "Fira Code", monospace;
 }
 
 .dark {
   --background: #010906;
   --background-inverse: #eeeeee;
-  --stroke-color: #ffffff19;
+  --stroke-color: #ffffff25;
   --text-color: #9dbfb9;
+  --section-title: #74e7ed;
   --glass-bg: #030f1a70;
   --badge-border: #a0a7ac;
 }

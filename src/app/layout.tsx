@@ -5,7 +5,7 @@ import Navbar from '@/components/navbar';
 import Container from '@/components/container';
 import Footer from '@/components/footer';
 import { ThemeProvider } from '@/components/theme-provider';
-import ConstellationBackground from '@/components/animated-bg';
+import ConstellationBackground from '@/components/animation/animated-bg';
 
 const openSans = Open_Sans({
   variable: '--font-sans',

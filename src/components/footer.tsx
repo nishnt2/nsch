@@ -1,31 +1,33 @@
+import Link from "next/link";
+
 export default function Footer() {
   return (
-    <footer className=" mt-16 border-t bg-[#030f1a]/70 border-gray-300 dark:border-gray-700 text-center pt-10 pb-4 text-sm">
-      <div className="mb-4 flex justify-center space-x-8 text-base">
-        <a
-          href="https://github.com/yourusername"
+    <footer className="xxl:text-base text-sm  text-foreground mt-16 border-t backdrop-blur-[1px]  dark:bg-gray-900/70 dark:border-gray-700 text-center pt-10 pb-4 ">
+      <div className="mb-4 flex justify-center space-x-8 ">
+        <Link
+          href="https://github.com/nishnt2"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-black dark:hover:text-white transition"
+          className="hover:text-white"
         >
           GitHub
-        </a>
-        <a
+        </Link>
+        <Link
           href="https://linkedin.com/in/yourusername"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-black dark:hover:text-white transition"
+          className="hover:text-white"
         >
           LinkedIn
-        </a>
-        <a
+        </Link>
+        <Link
           href="https://twitter.com/ImNishant3"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-black dark:hover:text-white transition"
+          className="hover:text-white"
         >
           Twitter
-        </a>
+        </Link>
       </div>
 
       <div className=" font-code">

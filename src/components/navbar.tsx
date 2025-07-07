@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 export default function Navbar() {
   return (
-    <nav className="xxl:text-base text-sm text-foreground sticky text- top-0 md:top-1 h-nav z-50 mx-auto w-full max-w-[100%] sm:max-w-[600px] md:max-w-[700px] lg:max-w-[800px] backdrop-blur-[2px] bg-white/70 dark:bg-gray-900/70  sm:rounded-xl shadow-xl">
+    <nav className="xxl:text-base text-sm text-foreground sticky text- top-0 md:top-1 h-nav z-50 mx-auto w-full max-w-[100%] sm:max-w-[600px] md:max-w-[650px] lg:max-w-[700px] backdrop-blur-[2px] bg-white/70 dark:bg-gray-900/70  sm:rounded-xl shadow-xl">
       <div className="flex h-16 items-center justify-between px-4">
         {/* Left: Logo */}
         <Link href="/" className="text-sm font-code font-medium">

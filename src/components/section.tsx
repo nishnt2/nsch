@@ -1,11 +1,11 @@
-import { ReactNode } from 'react';
-import clsx from 'clsx'; // Optional but helpful for cleaner conditional classes
+import { ReactNode } from "react";
+import clsx from "clsx"; // Optional but helpful for cleaner conditional classes
 
 export default function Section({
   children,
-  classname = '',
+  classname = "",
   glassMorphed = true,
-  title = '',
+  title = "",
 }: {
   children: ReactNode;
   classname?: string;
@@ -16,14 +16,16 @@ export default function Section({
     <section
       className={clsx(
         classname,
-        'w-full  p-6 sm:p-8',
+        "w-full  p-6 sm:p-8",
         glassMorphed
-          ? 'bg-glassBg backdrop-blur-[2px] rounded-md border border-white/5 shadow-md'
-          : 'bg-transparent backdrop-blur-0'
+          ? "bg-glassBg backdrop-blur-[2px] rounded-md border border-white/5 shadow-md"
+          : "bg-transparent backdrop-blur-0"
       )}
     >
-      <h2 className="text-sectionTitle text-lg font-medium">_{title} </h2>
-      <div className="h-4" />
+      <h2 className="mb-4 lg:mb-6 text-sectionTitle text-lg font-medium">
+        _{title}{" "}
+      </h2>
+
       {children}
     </section>
   );

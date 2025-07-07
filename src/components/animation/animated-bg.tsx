@@ -42,8 +42,6 @@ export default function ConstellationBackground() {
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
 
-      // const isDark = document.documentElement.classList.contains("dark");
-
       const starColor =
         getComputedStyle(document.body)
           .getPropertyValue("--background-inverse")

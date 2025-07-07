@@ -1,9 +1,7 @@
-'use client';
-
-import { cn } from '@/lib/utils';
-import { stagger, useAnimate, useInView } from 'motion/react';
-import { useEffect } from 'react';
-
+"use client";
+import { cn } from "@/lib/utils";
+import { motion, useInView } from "motion/react";
+import { useRef } from "react";
 export const TypewriterEffectSmooth = ({
   words,
   className,
@@ -13,53 +11,38 @@ export const TypewriterEffectSmooth = ({
     className?: string;
   }[];
   className?: string;
-  cursorClassName?: string;
 }) => {
   const wordsArray = words.map((word) => ({
     ...word,
-    text: word.text.split(''),
+    text: word.text.split(""),
   }));
+  const ref = useRef<HTMLDivElement>(null);
 
-  const [scope, animate] = useAnimate();
-  const isInView = useInView(scope);
-
-  useEffect(() => {
-    if (isInView) {
-      animate(
-        'span',
-        { opacity: 1, transform: 'translateY(0px)' },
-        {
-          duration: 0.6,
-          delay: stagger(0.06),
-          easing: 'ease-in-out',
-        }
-      );
-    }
-  }, [isInView, animate]);
-
-  const renderWords = () => (
-    <div ref={scope} className="flex flex-wrap leading-tight">
-      {wordsArray.map((word, idx) => (
-        <div key={`word-${idx}`} className="inline-block mr-1">
-          {word.text.map((char, index) => (
-            <span
-              key={`char-${index}`}
-              className={cn(
-                'text-textClr opacity-0 inline-block',
-                word.className
-              )}
-            >
-              {char}
-            </span>
-          ))}
-        </div>
-      ))}
-    </div>
-  );
+  const inView = useInView(ref, { once: true });
 
   return (
-    <div className={cn('my-6', className)}>
-      <div className="text-sm">{renderWords()}</div>
+    <div className={cn(className)}>
+      <div ref={ref} className="flex flex-wrap leading-tight text-sm">
+        {wordsArray.map((word, idx) => (
+          <div key={`word-${idx}`} className="inline-block mr-1.5">
+            {word.text.map((char, index) => (
+              <motion.span
+                key={`char-${idx}-${index}`}
+                className={cn("inline-block", word.className)}
+                initial={{ opacity: 0 }}
+                animate={inView ? { opacity: 1 } : {}}
+                transition={{
+                  delay: idx * 0.2 + index * 0.06, // staggered by word + char
+                  duration: 0.4,
+                  ease: "easeIn",
+                }}
+              >
+                {char}
+              </motion.span>
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

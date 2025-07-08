@@ -8,6 +8,7 @@ import Section from "@/components/section";
 import React, { useEffect, useState } from "react";
 import { MarkdownRenderer } from "@/components/markdown-renderer";
 import Link from "next/link";
+import AnimatedText from "@/components/animation/animated-text";
 
 export default function Article() {
   const [article, setArticle] = useState<DevToPost>();
@@ -40,12 +41,14 @@ export default function Article() {
                 <article className="bg-transparent rounded-lg shadow-sm">
                   {/* Post Header */}
                   <header className="mb-8 pb-6 border-b border-gray-500">
-                    <h1 className=" text-2xl md:text-3xl font-bold text-textClr mb-3">
-                      {article?.title}
-                    </h1>
+                    <AnimatedText
+                      className="ml-[-0.25em] text-2xl md:text-3xl font-bold text-textClr mb-3"
+                      text={article?.title}
+                    />
+
                     <div className="flex items-center justify-between  text-sm">
                       <span className="mr-4">
-                        {article?.user.name.split(" ")[0]} from{" "}
+                        By {article?.user.name.split(" ")[0]} from{" "}
                         <Link
                           href={article.url}
                           target="_blank"

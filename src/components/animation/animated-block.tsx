@@ -1,7 +1,7 @@
-'use client';
-import React, { useRef } from 'react';
+"use client";
+import React, { useRef } from "react";
 
-import { motion, useInView } from 'motion/react';
+import { motion, useInView } from "motion/react";
 
 export interface IProps extends React.HTMLAttributes<HTMLDivElement> {
   initialOpacity?: number;
@@ -18,10 +18,10 @@ export interface IProps extends React.HTMLAttributes<HTMLDivElement> {
 const AnimatedBlock: React.FC<IProps> = ({
   initialOpacity = 0,
   finalOpacity = 1,
-  initialY = '-15',
-  finalY = '0',
-  duration = '1',
-  delay = '0.2',
+  initialY = "-15",
+  finalY = "0",
+  duration = "1",
+  delay = "0.2",
   animateOnlyOnce = true,
   offset = 0.1, //animates when element is 10% below from top inside viewport
   animateWhenInView = true,
@@ -35,6 +35,7 @@ const AnimatedBlock: React.FC<IProps> = ({
 
   return (
     <motion.div
+      className="w-full"
       ref={divRef}
       initial={{ opacity: initialOpacity, y: parseInt(initialY) }}
       animate={

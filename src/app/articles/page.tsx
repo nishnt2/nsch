@@ -22,7 +22,7 @@ export default async function Article() {
               <CardHeader className="mb-1">
                 <Link
                   href={`/articles/${article.slug}`}
-                  className="text-base md:text-lg font-semibold text-textClr hover:text-sectionTitle  transition-colors duration-200 line-clamp-2 leading-tight"
+                  className="text-sm md:text-base font-medium text-textClr hover:text-sectionTitle  transition-colors duration-200  leading-tight"
                 >
                   {article.title}
                 </Link>

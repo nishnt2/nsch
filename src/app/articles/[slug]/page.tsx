@@ -1,0 +1,97 @@
+"use client";
+import { DevToPost } from "@/lib/types";
+import { fetchPostUsingSlug, formatDate } from "@/lib/utils";
+import { useParams } from "next/navigation";
+import AnimatedBlock from "@/components/animation/animated-block";
+import Container from "@/components/container";
+import Section from "@/components/section";
+import React, { useEffect, useState } from "react";
+import { MarkdownRenderer } from "@/components/markdown-renderer";
+import Link from "next/link";
+
+export default function Article() {
+  const [article, setArticle] = useState<DevToPost>();
+  const { slug } = useParams();
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      if (!slug) return;
+      try {
+        const post = await fetchPostUsingSlug(slug);
+        setArticle(post);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchPost();
+  }, [slug]);
+
+  if (!article?.id) return <></>;
+
+  return (
+    <Container>
+      <AnimatedBlock>
+        <Section>
+          <div className="min-h-screen ">
+            <div>
+              {/* Main Content */}
+              <main className="lg:col-span-3">
+                <article className="bg-transparent rounded-lg shadow-sm">
+                  {/* Post Header */}
+                  <header className="mb-8 pb-6 border-b border-gray-500">
+                    <h1 className=" text-2xl md:text-3xl font-bold text-textClr mb-3">
+                      {article?.title}
+                    </h1>
+                    <div className="flex items-center justify-between  text-sm">
+                      <span className="mr-4">
+                        {article?.user.name.split(" ")[0]} from{" "}
+                        <Link
+                          href={article.url}
+                          target="_blank"
+                          className="text-sectionTitle font-semibold hover:text-textClr"
+                        >
+                          Dev.to
+                        </Link>
+                      </span>
+                      <span>{formatDate(article?.published_at)}</span>
+                    </div>
+                  </header>
+
+                  {/* Markdown Content */}
+                  <div className="prose-custom">
+                    <MarkdownRenderer content={article?.body_markdown} />
+                  </div>
+                </article>
+              </main>
+            </div>
+
+            {/* Custom Styles */}
+            <style jsx>{`
+              .code-block {
+                font-family: "Fira Code", "Monaco", "Cascadia Code",
+                  "Roboto Mono", monospace;
+                line-height: 1.5;
+              }
+
+              .inline-code {
+                font-family: "Fira Code", "Monaco", "Cascadia Code",
+                  "Roboto Mono", monospace;
+              }
+
+              .code-header {
+                font-family: "Fira Code", "Monaco", "Cascadia Code",
+                  "Roboto Mono", monospace;
+              }
+
+              .prose-custom img {
+                max-width: 100px;
+                height: auto;
+              }
+            `}</style>
+          </div>
+        </Section>
+      </AnimatedBlock>
+    </Container>
+  );
+}

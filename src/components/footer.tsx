@@ -13,7 +13,7 @@ export default function Footer() {
           GitHub
         </Link>
         <Link
-          href="https://linkedin.com/in/yourusername"
+          href="https://www.linkedin.com/in/nishant-patil-160000185/"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-white"
@@ -26,7 +26,15 @@ export default function Footer() {
           rel="noopener noreferrer"
           className="hover:text-white"
         >
-          Twitter
+          X(Twitter)
+        </Link>
+        <Link
+          href="https://discordapp.com/users/nshxt"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-white"
+        >
+          Discord
         </Link>
       </div>
 

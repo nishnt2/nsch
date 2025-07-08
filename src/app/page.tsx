@@ -48,7 +48,7 @@ export default function Home() {
             You can also find me on{" "}
             <Link
               target="_blank"
-              href={"#"}
+              href="https://github.com/nishnt2"
               className="font-bold text-sectionTitle"
             >
               GitHub
@@ -56,7 +56,7 @@ export default function Home() {
             ,{" "}
             <Link
               target="_blank"
-              href={"#"}
+              href="https://www.linkedin.com/in/nishant-patil-160000185/"
               className="font-bold text-sectionTitle"
             >
               LinkedIn
@@ -64,7 +64,7 @@ export default function Home() {
             , and{" "}
             <Link
               target="_blank"
-              href={"#"}
+              href="https://x.com/ImNishant3"
               className="font-bold text-sectionTitle"
             >
               X
@@ -85,6 +85,17 @@ export default function Home() {
         <Section title="mystack">
           {" "}
           <TechStack />
+        </Section>
+      </AnimatedBlock>
+
+      <AnimatedBlock delay="0.3">
+        <Section title="mywork" classname="w-full">
+          <></>
+        </Section>
+      </AnimatedBlock>
+      <AnimatedBlock delay="0.4">
+        <Section title="alsointo" classname="w-full">
+          Chess | Anime/Manga | Cricket | Badminton | Music | Rubik Cubes
         </Section>
       </AnimatedBlock>
     </main>

@@ -16,6 +16,7 @@ export default {
         border: "var(--border)",
         badgeBorder: "var(--badge-border)",
         background: `var(--background)`,
+        bgInverse: `var(--background-inverse)`,
         foreground: "#c9d1d9",
         sectionTitle: "var(--section-title)",
       },

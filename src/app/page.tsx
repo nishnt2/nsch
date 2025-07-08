@@ -62,7 +62,11 @@ export default function Home() {
               LinkedIn
             </Link>
             , and{" "}
-            <Link target="_blank" href={"#"} className="text-sectionTitle">
+            <Link
+              target="_blank"
+              href={"#"}
+              className="font-bold text-sectionTitle"
+            >
               X
             </Link>
             — or we can chat over a chess board at{" "}
@@ -72,8 +76,8 @@ export default function Home() {
               className="font-bold text-sectionTitle"
             >
               Chess.com
-            </Link>{" "}
-            :)
+            </Link>
+            !
           </p>
         </Section>
       </AnimatedBlock>

@@ -3,11 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --background: #defaf5;
-  --background-inverse: #000000;
+  --background: #deece9;
+  --background-inverse: #010906;
   --stroke-color: #201e282f;
   --text-color: #213537;
-  --section-title: #2c4d4f;
+  --section-title: #257b80;
+
+  /* --section-title: #2c4d4f; */
   --glass-bg: #79869270;
   --badge-border: #181818;
 
@@ -17,11 +19,13 @@
 
 .dark {
   --background: #010906;
-  --background-inverse: #eeeeee;
+  --background-inverse: #defaf5;
   --stroke-color: #ffffff25;
   --text-color: #9dbfb9;
-  --section-title: #74e7ed;
-  --glass-bg: #030f1a70;
+  /* --section-title: #74e7ed; */
+  --section-title: #35858a;
+
+  --glass-bg: #23292daa;
   --badge-border: #a0a7ac;
 }
 

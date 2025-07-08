@@ -16,7 +16,9 @@ export async function getAllPosts(): Promise<DevToPost[]> {
   return posts;
 }
 
-export async function fetchPostUsingSlug(slug: string): Promise<DevToPost> {
+export async function fetchPostUsingSlug(
+  slug: string | string[]
+): Promise<DevToPost> {
   const res = await fetch(`https://dev.to/api/articles/nshnt/${slug}`);
 
   if (!res.ok) throw new Error("Failed to fetch Dev.to articles");

@@ -22,9 +22,11 @@ export default function Section({
           : "bg-transparent backdrop-blur-0"
       )}
     >
-      <h2 className="mb-4 lg:mb-6 text-sectionTitle text-lg font-medium">
-        _{title}{" "}
-      </h2>
+      {title ? (
+        <h2 className="mb-4 lg:mb-6 text-sectionTitle text-lg font-medium">
+          _{title}{" "}
+        </h2>
+      ) : null}
 
       {children}
     </section>

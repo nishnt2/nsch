@@ -8,7 +8,6 @@ import Link from "next/link";
 
 export default async function Article() {
   const posts = await getAllPosts();
-  console.log({ posts });
 
   return (
     <Container>

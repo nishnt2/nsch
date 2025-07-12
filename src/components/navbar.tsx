@@ -6,10 +6,12 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { usePathname } from "next/navigation";
+import ContactDialog from "./contact-email";
 
 export default function Navbar() {
   const activeLink = usePathname();
-
+  const [isContactDialogOpen, setIsContactDialogOpen] =
+    useState<boolean>(false);
   return (
     <nav className="xxl:text-base text-sm text-foreground sticky text- top-0 md:top-1 h-nav z-50 mx-auto w-full max-w-[100%] sm:max-w-[600px] md:max-w-[650px] lg:max-w-[700px] backdrop-blur-[2px] bg-white/70 dark:bg-gray-900/70  sm:rounded-xl shadow-xl">
       <div className="flex h-16 items-center justify-between px-2 ">
@@ -51,14 +53,13 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <Link
-              href="mailto:nishantpatil2911@gmail.com"
-              className={`hover:text-white ${
+            <Button onClick={() => setIsContactDialogOpen(true)}
+              className={`hover:text-white p-0 hover:bg-transparent contents bg-transparent ${
                 activeLink === "/articles" && "text-white font-semibold"
               }`}
             >
               Contact
-            </Link>
+            </Button>
           </li>
           <li>
             <Link
@@ -72,7 +73,10 @@ export default function Navbar() {
             </Link>
           </li>
         </ul>
-
+        <ContactDialog
+          isOpen={isContactDialogOpen}
+          setIsOpen={setIsContactDialogOpen}
+        />
         <div>
           {/* Mobile Hamburger */}
           <ThemeSwitch />

@@ -1,3 +1,4 @@
+"use client";
 import AnimatedBlock from "@/components/animation/animated-block";
 import { TypewriterEffectSmooth } from "@/components/animation/typerwriter-effect";
 import Section from "@/components/section";
@@ -6,10 +7,30 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { SiGithub, SiLinkedin, SiX } from "react-icons/si";
 import { formatDate, getAllPosts } from "@/lib/utils";
 import Link from "next/link";
-export default async function Home() {
-  const posts = await getAllPosts();
+import { useEffect, useState } from "react";
+import ContactDialog from "@/components/contact-email";
+import { Button } from "@/components/ui/button";
+import { DevToPost } from "@/lib/types";
+export default function Home() {
+  const [isContactDialogOpen, setIsContactDialogOpen] =
+    useState<boolean>(false);
+  const [featuredPost, setFeaturedPost] = useState<DevToPost | undefined>(
+    undefined
+  );
 
-  const article = posts[0];
+  useEffect(() => {
+    async function fetchPost() {
+      try {
+        const posts = await getAllPosts();
+
+        setFeaturedPost(posts[0]);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    fetchPost();
+  }, []);
 
   return (
     <main className="font-code flex flex-col gap-[24px] row-start-2 items-center sm:items-start width-full">
@@ -43,15 +64,17 @@ export default async function Home() {
               resume
             </Link>
             , and feel free to{" "}
-            <Link
-              target="_blank"
-              href={"mailto:nishantpatil2911@gmail.com"}
-              className="font-bold text-sectionTitle"
+            <Button
+              onClick={() => setIsContactDialogOpen(true)}
+              className="p-0 bg-transparent hover:bg-transparent font-bold text-sectionTitle"
             >
-              get in touch via email.
-            </Link>
+              get in touch.
+            </Button>
           </p>
-
+          <ContactDialog
+            isOpen={isContactDialogOpen}
+            setIsOpen={setIsContactDialogOpen}
+          />
           <div className="mb-4 flex items-center">
             <span className="mr-2">You can also find me on: </span>
             <div className="flex gap-4">
@@ -101,27 +124,29 @@ export default async function Home() {
           title="featuredPost"
           classname="w-full flex center  justify-center flex-col"
         >
-          <Card
-            key={article.id}
-            className="w-full hover:shadow-lg transition-shadow duration-200 py-4 cursor-default"
-          >
-            <CardHeader className="mb-1">
-              <Link
-                href={`/articles/${article.slug}`}
-                className="text-sm md:text-base font-medium text-textClr hover:text-sectionTitle  transition-colors duration-200  leading-tight"
-              >
-                {article.title}
-              </Link>
-            </CardHeader>
-            <CardContent className="pt-0">
-              <div className="flex items-center gap-3 text-s">
-                <span>{formatDate(article.published_at)}</span>
-                <i className="font-normal  text-sm">
-                  ({article.reading_time_minutes} min read)
-                </i>
-              </div>
-            </CardContent>
-          </Card>
+          {featuredPost ? (
+            <Card
+              key={featuredPost.id}
+              className="w-full hover:shadow-lg transition-shadow duration-200 py-4 cursor-default"
+            >
+              <CardHeader className="mb-1">
+                <Link
+                  href={`/articles/${featuredPost.slug}`}
+                  className="text-sm md:text-base font-medium text-textClr hover:text-sectionTitle  transition-colors duration-200  leading-tight"
+                >
+                  {featuredPost.title}
+                </Link>
+              </CardHeader>
+              <CardContent className="pt-0">
+                <div className="flex items-center gap-3 text-s">
+                  <span>{formatDate(featuredPost.published_at)}</span>
+                  <i className="font-normal  text-sm">
+                    ({featuredPost.reading_time_minutes} min read)
+                  </i>
+                </div>
+              </CardContent>
+            </Card>
+          ) : null}
 
           <Link
             href="/articles"

@@ -7,7 +7,9 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export async function getAllPosts(): Promise<DevToPost[]> {
-  const res = await fetch(`https://dev.to/api/articles?username=nshnt`);
+  const res = await fetch(
+    `https://dev.to/api/articles?username=${process.env.NEXT_PUBLIC_DEV_TO_USERNAME}`
+  );
 
   if (!res.ok) throw new Error("Failed to fetch Dev.to articles");
 
@@ -19,7 +21,9 @@ export async function getAllPosts(): Promise<DevToPost[]> {
 export async function fetchPostUsingSlug(
   slug: string | string[]
 ): Promise<DevToPost> {
-  const res = await fetch(`https://dev.to/api/articles/nshnt/${slug}`);
+  const res = await fetch(
+    `https://dev.to/api/articles/${process.env.NEXT_PUBLIC_DEV_TO_USERNAME}/${slug}`
+  );
 
   if (!res.ok) throw new Error("Failed to fetch Dev.to articles");
 

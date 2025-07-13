@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import ContactDialog from "@/components/contact-email";
 import { Button } from "@/components/ui/button";
 import { DevToPost } from "@/lib/types";
+import WorkExperienceTimeline from "@/components/work-experience";
 export default function Home() {
   const [isContactDialogOpen, setIsContactDialogOpen] =
     useState<boolean>(false);
@@ -79,17 +80,17 @@ export default function Home() {
             <span className="mr-2">You can also find me on: </span>
             <div className="flex gap-4">
               <Link target="_blank" href="https://github.com/nishnt2">
-                <SiGithub size={18} />
+                <SiGithub size={16} />
               </Link>
 
               <Link
                 target="_blank"
                 href="https://www.linkedin.com/in/nishant-patil-160000185/"
               >
-                <SiLinkedin size={18} />
+                <SiLinkedin size={16} />
               </Link>
               <Link target="_blank" href="https://x.com/ImNishant3">
-                <SiX size={18} />
+                <SiX size={16} />
               </Link>
             </div>
           </div>
@@ -107,21 +108,21 @@ export default function Home() {
           </p>
         </Section>
       </AnimatedBlock>
-      <AnimatedBlock delay="0.2">
-        <Section title="mywork" classname="w-full">
-          <></>
-        </Section>
-      </AnimatedBlock>
-      <AnimatedBlock delay="0.3">
+
+      <AnimatedBlock delay="0.1">
         <Section title="mystack">
           {" "}
           <TechStack />
         </Section>
       </AnimatedBlock>
-
-      <AnimatedBlock delay="0.4">
+      <AnimatedBlock>
+        <Section title="experience" classname="w-full">
+          <WorkExperienceTimeline />
+        </Section>
+      </AnimatedBlock>
+      <AnimatedBlock delay="0.1">
         <Section
-          title="featuredPost"
+          title="featured"
           classname="w-full flex center  justify-center flex-col"
         >
           {featuredPost ? (
@@ -156,7 +157,7 @@ export default function Home() {
           </Link>
         </Section>
       </AnimatedBlock>
-      <AnimatedBlock delay="0.4">
+      <AnimatedBlock delay="0.1">
         <Section title="alsointo" classname="w-full">
           Chess | Anime/Manga | Cricket | Badminton | Music | Rubik Cubes
         </Section>

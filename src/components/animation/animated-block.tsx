@@ -13,6 +13,7 @@ export interface IProps extends React.HTMLAttributes<HTMLDivElement> {
   offset?: number;
   animateOnlyOnce?: boolean;
   animateWhenInView?: boolean;
+  fullWidth?: boolean;
 }
 
 const AnimatedBlock: React.FC<IProps> = ({
@@ -22,6 +23,7 @@ const AnimatedBlock: React.FC<IProps> = ({
   finalY = "0",
   duration = "1",
   delay = "0.2",
+  fullWidth = true,
   animateOnlyOnce = true,
   offset = 0.1, //animates when element is 10% below from top inside viewport
   animateWhenInView = true,
@@ -35,7 +37,7 @@ const AnimatedBlock: React.FC<IProps> = ({
 
   return (
     <motion.div
-      className="w-full"
+      className={`${fullWidth && "w-full"}`}
       ref={divRef}
       initial={{ opacity: initialOpacity, y: parseInt(initialY) }}
       animate={

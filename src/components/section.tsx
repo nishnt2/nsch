@@ -16,14 +16,14 @@ export default function Section({
     <section
       className={clsx(
         classname,
-        "w-full  p-6 sm:p-8",
+        "w-full  p-4 sm:p-6",
         glassMorphed
           ? "bg-glassBg backdrop-blur-[2px] rounded-md border border-white/5 shadow-md"
           : "bg-transparent backdrop-blur-0"
       )}
     >
       {title ? (
-        <h2 className="mb-4 lg:mb-6 text-sectionTitle text-lg font-medium">
+        <h2 className="mb-4 lg:mb-6 text-sectionTitle text-lg md:text-md font-medium">
           _{title}{" "}
         </h2>
       ) : null}

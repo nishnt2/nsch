@@ -38,11 +38,11 @@ export default function Footer() {
         </Link>
       </div>
 
-      <div className=" font-code">
+      <p className=" font-code">
         © {new Date().getFullYear()} Nishant. Made with Nextjs.
-      </div>
+      </p>
 
-      <div className=" mt-6 font-code">Glad you visited :&#41;</div>
+      <p className=" mt-6 text-[12px] font-code">Glad you visited :&#41;</p>
     </footer>
   );
 }

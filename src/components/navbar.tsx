@@ -54,9 +54,7 @@ export default function Navbar() {
           </li>
           <li>
             <Button onClick={() => setIsContactDialogOpen(true)}
-              className={`hover:text-white p-0 hover:bg-transparent contents bg-transparent ${
-                activeLink === "/articles" && "text-white font-semibold"
-              }`}
+              className={`hover:text-white p-0 hover:bg-transparent contents bg-transparent `}
             >
               Contact
             </Button>
@@ -65,9 +63,7 @@ export default function Navbar() {
             <Link
               target="_blank"
               href="https://drive.google.com/file/d/1_lb0OMxyq3herSXslBV6O11ABo0Y6q59/view?usp=drive_link"
-              className={`hover:text-white ${
-                activeLink === "/articles" && "text-white font-semibold"
-              }`}
+              className={`hover:text-white `}
             >
               Resume
             </Link>

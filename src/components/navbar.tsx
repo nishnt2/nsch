@@ -7,85 +7,102 @@ import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { usePathname } from "next/navigation";
 import ContactDialog from "./contact-email";
+import MobileNavigation from "./mobile-sidebar";
 
 export default function Navbar() {
   const activeLink = usePathname();
   const [isContactDialogOpen, setIsContactDialogOpen] =
     useState<boolean>(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+
+  // useEffect(() => {
+  //   setIsMobileMenuOpen(false);
+  // }, [activeLink]);
+
   return (
-    <nav className="xxl:text-base text-sm text-foreground sticky text- top-0 md:top-1 h-nav z-50 mx-auto w-full max-w-[100%] sm:max-w-[600px] md:max-w-[650px] lg:max-w-[700px] backdrop-blur-[2px] bg-white/70 dark:bg-gray-900/70  sm:rounded-xl shadow-xl">
-      <div className="flex h-16 items-center justify-between px-2 ">
-        {/* Left: Logo */}
-        <Link href="/" className="text-sm font-code font-medium">
-          &lt;Nsch/&gt;
-        </Link>
+    <>
+      <nav className="xxl:text-base text-sm text-foreground sticky text- top-0 md:top-1 h-nav z-50 mx-auto w-full max-w-[100%] sm:max-w-[600px] md:max-w-[650px] lg:max-w-[700px] backdrop-blur-[2px] bg-white/70 dark:bg-gray-900/70  sm:rounded-xl shadow-xl">
+        <div className="flex h-16 items-center justify-between px-2 ">
+          {/* Left: Logo */}
+          <Link href="/" className="text-sm font-code font-medium">
+            &lt;Nsch/&gt;
+          </Link>
 
-        {/* Web Navigation */}
-        <ul className="hidden md:flex space-x-6 font-medium">
-          <li>
-            <Link
-              href="/about"
-              className={`hover:text-white ${
-                activeLink === "/about" && "text-white font-semibold"
-              }`}
+          {/* Web Navigation */}
+          <ul className="hidden md:flex space-x-6 font-medium">
+            <li>
+              <Link
+                href="/about"
+                className={`hover:text-white ${
+                  activeLink === "/about" && "text-white font-semibold"
+                }`}
+              >
+                About
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/projects"
+                className={`hover:text-white ${
+                  activeLink === "/projects" && "text-white font-semibold"
+                }`}
+              >
+                Projects
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/articles"
+                className={`hover:text-white ${
+                  activeLink === "/articles" && "text-white font-semibold"
+                }`}
+              >
+                Articles
+              </Link>
+            </li>
+            <li>
+              <Button
+                onClick={() => setIsContactDialogOpen(true)}
+                className={`hover:text-white p-0 hover:bg-transparent contents bg-transparent `}
+              >
+                Contact
+              </Button>
+            </li>
+            <li>
+              <Link
+                target="_blank"
+                href="https://drive.google.com/file/d/1_lb0OMxyq3herSXslBV6O11ABo0Y6q59/view?usp=drive_link"
+                className={`hover:text-white `}
+              >
+                Resume
+              </Link>
+            </li>
+          </ul>
+          <ContactDialog
+            isOpen={isContactDialogOpen}
+            setIsOpen={setIsContactDialogOpen}
+          />
+          <div className="flex items-center space-x-2">
+            <ThemeSwitch />
+
+            <Button
+              variant="ghost"
+              className="md:hidden text-gray-700 dark:text-gray-200 text-2xl"
+              onClick={() => setIsMobileMenuOpen(true)}
             >
-              About
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/projects"
-              className={`hover:text-white ${
-                activeLink === "/projects" && "text-white font-semibold"
-              }`}
-            >
-              Projects
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/articles"
-              className={`hover:text-white ${
-                activeLink === "/articles" && "text-white font-semibold"
-              }`}
-            >
-              Articles
-            </Link>
-          </li>
-          <li>
-            <Button onClick={() => setIsContactDialogOpen(true)}
-              className={`hover:text-white p-0 hover:bg-transparent contents bg-transparent `}
-            >
-              Contact
+              ☰
             </Button>
-          </li>
-          <li>
-            <Link
-              target="_blank"
-              href="https://drive.google.com/file/d/1_lb0OMxyq3herSXslBV6O11ABo0Y6q59/view?usp=drive_link"
-              className={`hover:text-white `}
-            >
-              Resume
-            </Link>
-          </li>
-        </ul>
-        <ContactDialog
-          isOpen={isContactDialogOpen}
-          setIsOpen={setIsContactDialogOpen}
-        />
-        <div>
-          {/* Mobile Hamburger */}
-          <ThemeSwitch />
-
-          <Button
-            variant="ghost"
-            className="md:hidden  text-gray-700 dark:text-gray-200 text-2xl"
-          >
-            ☰
-          </Button>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+
+      <MobileNavigation
+        activeLink={activeLink}
+        isMobileMenuOpen={isMobileMenuOpen}
+        setIsMobileMenuOpen={setIsMobileMenuOpen}
+        setIsContactDialogOpen={setIsContactDialogOpen}
+      />
+    </>
   );
 }
 

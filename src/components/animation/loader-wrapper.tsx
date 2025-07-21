@@ -41,6 +41,7 @@ const LoadingWrapper: React.FC<LoadingWrapperProps> = ({
         </motion.div>
       ) : (
         <motion.div
+          className="min-h-[100vh] flex flex-col"
           key="content"
           initial={{ opacity: 0.3 }}
           animate={{ opacity: 1 }}

@@ -71,7 +71,7 @@ export default function Navbar() {
             <li>
               <Link
                 target="_blank"
-                href="https://drive.google.com/file/d/1_lb0OMxyq3herSXslBV6O11ABo0Y6q59/view?usp=drive_link"
+                href="https://drive.google.com/file/d/1ApyQVppugAFe4ueSJqIowopbt6PfysTD/view?usp=drive_link"
                 className={`hover:text-white `}
               >
                 Resume

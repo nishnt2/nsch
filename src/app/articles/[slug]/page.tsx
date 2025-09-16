@@ -1,7 +1,7 @@
 "use client";
 import { DevToPost } from "@/lib/types";
 import { fetchPostUsingSlug, formatDate } from "@/lib/utils";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import AnimatedBlock from "@/components/animation/animated-block";
 import Container from "@/components/container";
 import Section from "@/components/section";
@@ -13,6 +13,8 @@ import AnimatedText from "@/components/animation/animated-text";
 export default function Article() {
   const [article, setArticle] = useState<DevToPost>();
   const { slug } = useParams();
+
+  const router = useRouter();
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -32,6 +34,9 @@ export default function Article() {
 
   return (
     <Container>
+      <button className="my-2" onClick={() => router.back()}>
+        back
+      </button>
       <AnimatedBlock>
         <Section>
           <div className="min-h-screen ">

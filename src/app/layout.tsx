@@ -6,8 +6,8 @@ import Container from "@/components/container";
 import Footer from "@/components/footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import ConstellationBackground from "@/components/animation/animated-bg";
-import LoadingWrapper from "@/components/animation/loader-wrapper";
-import SimpleConstellationLoader from "@/components/animation/loader";
+// import LoadingWrapper from "@/components/animation/loader-wrapper";
+// import SimpleConstellationLoader from "@/components/animation/loader";
 
 const openSans = Open_Sans({
   variable: "--font-sans",
@@ -35,15 +35,15 @@ export default function RootLayout({
         className={`${openSans.variable} ${firaCode.variable} antialiased text-base md:text-sm`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <LoadingWrapper
+          {/* <LoadingWrapper
             loader={<SimpleConstellationLoader />}
-            duration={2900}
-          >
-            <ConstellationBackground />
-            <Navbar />
-            <Container>{children}</Container>
-            <Footer />
-          </LoadingWrapper>
+            duration={2000}
+          > */}
+          <ConstellationBackground />
+          <Navbar />
+          <Container>{children}</Container>
+          <Footer />
+          {/* </LoadingWrapper> */}
         </ThemeProvider>
       </body>
     </html>

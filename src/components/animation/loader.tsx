@@ -5,13 +5,13 @@ import { motion } from "framer-motion";
 const ConstellationLoader = () => {
   const stars = [
     { x: 50, y: 30, delay: 0 },
-    { x: 80, y: 20, delay: 0.2 },
-    { x: 120, y: 40, delay: 0.4 },
-    { x: 90, y: 70, delay: 0.6 },
-    { x: 60, y: 80, delay: 0.8 },
-    { x: 30, y: 60, delay: 1.0 },
-    { x: 100, y: 50, delay: 1.2 },
-    { x: 140, y: 70, delay: 1.4 },
+    { x: 80, y: 20, delay: 0.1 },
+    { x: 120, y: 40, delay: 0.2 },
+    { x: 90, y: 70, delay: 0.3 },
+    { x: 60, y: 80, delay: 0.4 },
+    { x: 30, y: 60, delay: 0.6 },
+    { x: 100, y: 50, delay: 1.8 },
+    { x: 140, y: 70, delay: 1.0 },
   ];
 
   const connections = [

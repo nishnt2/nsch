@@ -11,10 +11,10 @@ export default function TechStack() {
           fullWidth={false}
           animateWhenInView={false}
           key={name}
-          delay={`${index / 10 + 0.01}`}
+          delay={index / 10 + 0.01}
           className="max-w-max"
-          initialY="-8"
-          finalY="0"
+          initialY={-8}
+          finalY={0}
           initialOpacity={0}
           finalOpacity={1}
         >

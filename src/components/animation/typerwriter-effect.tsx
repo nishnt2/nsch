@@ -32,8 +32,8 @@ export const TypewriterEffectSmooth = ({
                 initial={{ opacity: 0 }}
                 animate={inView ? { opacity: 1 } : {}}
                 transition={{
-                  delay: idx * 0.2 + index * 0.06, // staggered by word + char
-                  duration: 0.4,
+                  delay: idx * 0.02 + index * 0.09, // staggered by word + char
+                  duration: 0.2,
                   ease: "easeIn",
                 }}
               >

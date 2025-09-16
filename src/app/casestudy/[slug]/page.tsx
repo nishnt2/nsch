@@ -1,37 +1,36 @@
 "use client";
 import { DevToPost } from "@/lib/types";
-import { fetchPostUsingSlug, formatDate } from "@/lib/utils";
+import { getAllCaseStudies } from "@/lib/utils";
 import { useParams, useRouter } from "next/navigation";
 import AnimatedBlock from "@/components/animation/animated-block";
 import Container from "@/components/container";
 import Section from "@/components/section";
 import React, { useEffect, useState } from "react";
 import { MarkdownRenderer } from "@/components/markdown-renderer";
-import Link from "next/link";
 import AnimatedText from "@/components/animation/animated-text";
 import { ArrowLeft } from "lucide-react";
 
 export default function Article() {
-  const [article, setArticle] = useState<DevToPost>();
+  const [casestudy, setCaseStudy] = useState<DevToPost>();
   const { slug } = useParams();
 
   const router = useRouter();
 
   useEffect(() => {
     const fetchPost = async () => {
-      if (!slug) return;
       try {
-        const post = await fetchPostUsingSlug(slug);
-        setArticle(post);
+        const posts = await getAllCaseStudies();
+        const post = posts.find((item: DevToPost) => item.slug === slug);
+        setCaseStudy(post);
       } catch (err) {
         console.error(err);
       }
     };
 
-    fetchPost();
+    if (slug) fetchPost();
   }, [slug]);
 
-  if (!article?.id) return <></>;
+  if (!casestudy?.id) return <>Loading...</>;
 
   return (
     <Container>
@@ -53,27 +52,17 @@ export default function Article() {
                   <header className="mb-8 pb-6 border-b border-gray-500">
                     <AnimatedText
                       className="ml-[-0.25em] text-2xl md:text-3xl font-bold text-textClr mb-3"
-                      text={article?.title}
+                      text={casestudy?.title}
                     />
 
-                    <div className="flex items-center justify-between  text-sm">
-                      <span className="mr-4">
-                        By {article?.user.name.split(" ")[0]} from{" "}
-                        <Link
-                          href={article.url}
-                          target="_blank"
-                          className="text-sectionTitle font-semibold hover:text-textClr"
-                        >
-                          Dev.to
-                        </Link>
-                      </span>
-                      <span>{formatDate(article?.published_at)}</span>
+                    <div className="text-sm">
+                      By {casestudy?.user.name.split(" ")[0]}
                     </div>
                   </header>
 
                   {/* Markdown Content */}
                   <div className="prose-custom">
-                    <MarkdownRenderer content={article?.body_markdown} />
+                    <MarkdownRenderer content={casestudy?.body_markdown} />
                   </div>
                 </article>
               </main>

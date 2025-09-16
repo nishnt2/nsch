@@ -18,6 +18,12 @@ export async function getAllPosts(): Promise<DevToPost[]> {
   return posts;
 }
 
+export async function getAllCaseStudies() {
+  const res = await fetch("/api/casestudies");
+  if (!res.ok) throw new Error("Failed to fetch case studies");
+  return res.json();
+}
+
 export async function fetchPostUsingSlug(
   slug: string | string[]
 ): Promise<DevToPost> {

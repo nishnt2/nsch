@@ -14,6 +14,7 @@ import {
   SiRedux,
   SiDocker,
 } from "react-icons/si";
+import { ProjectType } from "./types";
 
 export const techStack = [
   { name: "React", icon: <SiReact color="#61DAFB" /> },
@@ -63,7 +64,7 @@ export const experiences = [
     ],
   },
   {
-    company: "Fyntune Solutions Pvt. Ltd.",
+    company: "Fyntune Solution Pvt. Ltd.",
     position: "ReactJs Developer",
     duration: "2021 - 2022",
     location: "Remote, India",
@@ -72,5 +73,45 @@ export const experiences = [
       "Managed complex state using Redux Toolkit and RTK Query with modular, cached data flow.",
       "Used TypeScript to improve code reliability and developer efficiency.",
     ],
+  },
+];
+
+export const projects: ProjectType[] = [
+  {
+    title: "Lorem Dashboard",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Integer nec odio. Praesent libero. Sed cursus ante dapibus.",
+    webUrl: "https://example.com/lorem-dashboard",
+    casestudy: "https://example.com/case-study-lorem",
+    github: "https://github.com/example/lorem-dashboard",
+    asset: "https://dummyassets.com/lorem-dashboard.mov",
+    keywords: ["React", "TypeScript", "UI", "Charts", "Analytics"],
+  },
+  {
+    title: "Ipsum Weather",
+    description:
+      "Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta.",
+    webUrl: "https://example.com/ipsum-weather",
+    github: "https://github.com/example/ipsum-weather",
+    asset: "/images/projects/ipsum-weather.jpg",
+    keywords: ["React Native", "API", "Geolocation", "Mobile", "UI"],
+  },
+  {
+    title: "Dolor Task Manager",
+    description:
+      "Mauris ipsum. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit.",
+    casestudy: "https://example.com/case-study-dolor",
+    github: "https://github.com/example/dolor-task-manager",
+    asset: "/images/projects/dolor-task-manager.svg",
+    keywords: ["Vue.js", "Collaboration", "Real-time", "Tasks", "WebSocket"],
+  },
+  {
+    title: "Sit Amet AI Generator",
+    description:
+      "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero.",
+    webUrl: "https://example.com/sit-amet-ai",
+    github: "https://github.com/example/sit-amet-ai",
+    asset: "/images/projects/sit-amet-ai.png",
+    keywords: ["Python", "TensorFlow", "AI", "Machine Learning", "API"],
   },
 ];

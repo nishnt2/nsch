@@ -12,6 +12,8 @@ import ContactDialog from "@/components/contact-email";
 import { Button } from "@/components/ui/button";
 import { DevToPost } from "@/lib/types";
 import WorkExperienceTimeline from "@/components/work-experience";
+import { projects } from "@/lib/constants";
+import ProjectCard from "@/components/project-card";
 export default function Home() {
   const [isContactDialogOpen, setIsContactDialogOpen] =
     useState<boolean>(false);
@@ -23,7 +25,6 @@ export default function Home() {
     async function fetchPost() {
       try {
         const posts = await getAllPosts();
-
         setFeaturedPost(posts[0]);
       } catch (err) {
         console.error(err);
@@ -35,7 +36,7 @@ export default function Home() {
 
   return (
     <main className="font-code flex flex-col gap-[24px] row-start-2 items-center sm:items-start width-full">
-      <AnimatedBlock delay="0.1">
+      <AnimatedBlock delay={0.1}>
         <Section title="whoami">
           <div className="mb-4">
             <TypewriterEffectSmooth
@@ -79,17 +80,26 @@ export default function Home() {
           <div className="mb-4 flex items-center">
             <span className="mr-2">You can also find me on: </span>
             <div className="flex gap-4">
-              <Link target="_blank" href="https://github.com/nishnt2">
+              <Link
+                target="_blank"
+                aria-label="Github Link"
+                href="https://github.com/nishnt2"
+              >
                 <SiGithub size={16} />
               </Link>
 
               <Link
+                aria-label="Linkedin Url"
                 target="_blank"
                 href="https://www.linkedin.com/in/nishant-patil-160000185/"
               >
                 <SiLinkedin size={16} />
               </Link>
-              <Link target="_blank" href="https://x.com/ImNishant3">
+              <Link
+                target="_blank"
+                aria-label="Twitter Link"
+                href="https://x.com/ImNishant3"
+              >
                 <SiX size={16} />
               </Link>
             </div>
@@ -99,6 +109,7 @@ export default function Home() {
             Or we can chat over a chess board at{" "}
             <Link
               target="_blank"
+              aria-label="Chess.com Link"
               href={"https://www.chess.com/member/nishantpatill"}
               className="font-bold text-sectionTitle"
             >
@@ -109,7 +120,7 @@ export default function Home() {
         </Section>
       </AnimatedBlock>
 
-      <AnimatedBlock delay="0.1">
+      <AnimatedBlock delay={0.1}>
         <Section title="mystack">
           {" "}
           <TechStack />
@@ -120,7 +131,7 @@ export default function Home() {
           <WorkExperienceTimeline />
         </Section>
       </AnimatedBlock>
-      <AnimatedBlock delay="0.1">
+      <AnimatedBlock delay={0.1}>
         <Section
           title="featured"
           classname="w-full flex center  justify-center flex-col"
@@ -128,7 +139,7 @@ export default function Home() {
           {featuredPost ? (
             <Card
               key={featuredPost.id}
-              className="w-full hover:shadow-lg transition-shadow duration-200 py-4 cursor-default"
+              className="w-full hover:shadow-lg border-gray-700 transition-shadow duration-200 py-4 cursor-default"
             >
               <CardHeader className="mb-1">
                 <Link
@@ -157,7 +168,21 @@ export default function Home() {
           </Link>
         </Section>
       </AnimatedBlock>
-      <AnimatedBlock delay="0.1">
+      {/* Projects */}
+
+      <AnimatedBlock delay={0.1}>
+        <Section title="projects" classname="w-full  ">
+          <div className="grid md:grid-cols-2 gap-4 ">
+            {projects.map((project, index) => (
+              <AnimatedBlock key={project.title} delay={index / 10 + 0.3}>
+                <ProjectCard project={project} />
+              </AnimatedBlock>
+            ))}
+          </div>
+        </Section>
+      </AnimatedBlock>
+      {/* Also Into */}
+      <AnimatedBlock delay={0.1}>
         <Section title="alsointo" classname="w-full">
           Chess | Anime/Manga | Cricket | Badminton | Music | Rubik Cubes
         </Section>

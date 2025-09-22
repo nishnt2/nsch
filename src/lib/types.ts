@@ -11,3 +11,12 @@ export type DevToPost = {
   url: string;
   body_markdown: string;
 };
+export type ProjectType = {
+  title: string;
+  description: string;
+  webUrl?: string;
+  casestudy?: string;
+  github: string;
+  asset: string;
+  keywords: Array<string>;
+};

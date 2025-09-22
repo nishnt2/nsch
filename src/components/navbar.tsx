@@ -8,6 +8,7 @@ import { motion } from "motion/react";
 import { usePathname } from "next/navigation";
 import ContactDialog from "./contact-email";
 import MobileNavigation from "./mobile-sidebar";
+import { resumeUrl } from "@/lib/constants";
 
 export default function Navbar() {
   const activeLink = usePathname();
@@ -71,7 +72,7 @@ export default function Navbar() {
             <li>
               <Link
                 target="_blank"
-                href="https://drive.google.com/file/d/1ApyQVppugAFe4ueSJqIowopbt6PfysTD/view?usp=drive_link"
+                href={resumeUrl}
                 className={`hover:text-white `}
               >
                 Resume

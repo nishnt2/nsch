@@ -16,6 +16,9 @@ import {
 } from "react-icons/si";
 import { ProjectType } from "./types";
 
+export const resumeUrl =
+  "https://drive.google.com/file/d/1ApyQVppugAFe4ueSJqIowopbt6PfysTD/view?usp=drive_link";
+
 export const techStack = [
   { name: "React", icon: <SiReact color="#61DAFB" /> },
   { name: "Next.js", icon: <SiNextdotjs color="#eee" /> },

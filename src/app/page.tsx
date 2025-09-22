@@ -12,7 +12,7 @@ import ContactDialog from "@/components/contact-email";
 import { Button } from "@/components/ui/button";
 import { DevToPost } from "@/lib/types";
 import WorkExperienceTimeline from "@/components/work-experience";
-import { projects } from "@/lib/constants";
+import { projects, resumeUrl } from "@/lib/constants";
 import ProjectCard from "@/components/project-card";
 export default function Home() {
   const [isContactDialogOpen, setIsContactDialogOpen] =
@@ -58,9 +58,7 @@ export default function Home() {
             Take a look at my{" "}
             <Link
               target="_blank"
-              href={
-                "https://drive.google.com/file/d/1ApyQVppugAFe4ueSJqIowopbt6PfysTD/view?usp=drive_link"
-              }
+              href={resumeUrl}
               className="font-bold text-sectionTitle"
             >
               resume

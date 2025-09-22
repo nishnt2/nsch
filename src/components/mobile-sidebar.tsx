@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import Link from "next/link";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { Button } from "./ui/button";
+import { resumeUrl } from "@/lib/constants";
 
 type MobileNavProps = {
   activeLink: string;
@@ -121,7 +122,7 @@ export default function MobileNavigation({
                   <li>
                     <Link
                       target="_blank"
-                      href="https://drive.google.com/file/d/1_lb0OMxyq3herSXslBV6O11ABo0Y6q59/view?usp=drive_link"
+                      href={resumeUrl}
                       className={`hover:text-white `}
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
